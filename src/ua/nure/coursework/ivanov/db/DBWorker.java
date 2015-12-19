@@ -6,9 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// 					INSERT INTO Persons (FirstName,LastName,Address,City) VALUES ('Lars','Monsen',21323,432112)
-
 import ua.nure.coursework.ivanov.data.Person;
+import ua.nure.coursework.ivanov.data.Trip;
 
 public class DBWorker {
 
@@ -63,22 +62,46 @@ public class DBWorker {
         statement.close();
     }
         
-//    public double selectAllTrips() throws SQLException {
-//		try {
-//			statement = connection.createStatement();
-//			ResultSet resultSet = statement.executeQuery("select rate from " + TABLE_NAME + " where name = '" + currencyName + "'");
-//			double rate = 0;
-//			 if (resultSet.next()) {
-//				rate = resultSet.getDouble("rate");
-//			 }
-//			
-//			resultSet.close();
-//			statement.close();
-//			return rate;
-//		} catch (SQLException e) {
-//			throw e;
-//		}
-//	}
+    public Trip[] selectAllTrips() throws SQLException {
+		try {
+			statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("select count(*) from " + TABLE_NAME);
+			int size = 0;
+			if (resultSet.next()) {
+				size = resultSet.getInt(1);
+				statement.close();
+			} else {
+				resultSet.close();
+				statement.close();
+				return null;
+			}
+			
+			Trip[] array = new Trip[size];
+			
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("select * from " + TABLE_NAME);
+			int iteration = 0;
+			while (resultSet.next()) {
+				array[iteration] = new Trip(new Person(resultSet.getString("name"), resultSet.getString("appointment")), 
+						resultSet.getString("destination"), resultSet.getDate("date").toString(), resultSet.getInt("id"));
+				if (resultSet.getInt("expectedDuration") != 0) {
+					array[iteration].setExpectedCost(resultSet.getInt("expectedDuration"),
+							resultSet.getDouble("expectedTicketPrice"), resultSet.getDouble("expectedDailyHabitation"));
+					if (resultSet.getInt("actualDuration") != 0) {
+						array[iteration].setActualCost(resultSet.getInt("actualDuration"),
+								resultSet.getDouble("actualTicketPrice"), resultSet.getDouble("actualDailyHabitation"));
+					}
+				}
+				iteration++;
+			}
+			
+			resultSet.close();
+			statement.close();
+			return array;
+		} catch (SQLException e) {
+			throw e;
+		}
+	}
 
 	public void updateTrip(String name, String appointment, String destination, String date, int id) throws SQLException {
     	statement = connection.createStatement();
@@ -99,13 +122,22 @@ public class DBWorker {
     
     public void updateTrip(String name, String appointment, String destination, String date,
     		int expectedDuration, double expectedTicketPrice, double expectedDailyHabitation,
-    		int actualDuration, double actualTicketPrice, double actualDailyHabitation, int id) throws SQLException {
+    		int actualDuration, double actualTicketPrice, double actualDailyHabitation,
+    		double balance, int id) throws SQLException {
     	statement = connection.createStatement();
     	statement.execute("update " + TABLE_NAME + " set name='" + name + "', appointment='" + appointment +
     			"', destination='" + destination + "' , date={ts '" + date + " 00:00:00'}, expectedDuration=" +
     			expectedDuration + ", expectedTicketPrice=" + expectedTicketPrice + ", expectedDailyHabitation=" + expectedDailyHabitation + 
     			", actualDuration=" + actualDuration + ", actualTicketPrice=" + actualTicketPrice + 
-    			", actualDailyHabitation=" + actualDailyHabitation + " where id = " + id);
+    			", actualDailyHabitation=" + actualDailyHabitation + ", balance=" + balance + " where id = " + id);
+    	statement.close();
+    }
+    
+    public void closeTrip(int id) throws SQLException {
+    	statement = connection.createStatement();
+    	statement.execute("update " + TABLE_NAME + " set expectedDuration=NULL, expectedTicketPrice=NULL,"
+    			+ " expectedDailyHabitation=NULL, actualDuration=NULL, actualTicketPrice=NULL,"
+    			+ " actualDailyHabitation=NULL, balance=NULL where id = " + id);
     	statement.close();
     }
     
@@ -140,6 +172,12 @@ public class DBWorker {
     			+ balance + ")");
     	statement.close();
     }
+    
+    public void deleteTrip(int id) throws SQLException {
+    	statement = connection.createStatement();
+    	statement.executeUpdate("delete from " + TABLE_NAME + " where id = " + id);
+    	statement.close();
+    }
    
 	private void shutdown() throws SQLException {
 		try {
@@ -158,25 +196,25 @@ public class DBWorker {
 
 	}
 
-	public static void main(String[] args) throws Exception {
-		DBWorker dbWorker = DBWorker.getInstance();
+	private static void restore(String[] args) throws Exception {
 		
+		DBWorker dbWorker = DBWorker.getInstance();
 		
 //		System.out.println("1");
 //		dbWorker.createTable();
 		
-		
-		
-		System.out.println("2");
+//		System.out.println("2");
 //		dbWorker.insertTrip("Abrams", "Tank", "NY", "1971-02-03");
 //		dbWorker.insertTrip("Rommel", "General", "Berlin", "2001-02-03", 1, 2, 3);
 //		dbWorker.insertTrip("Mark", "Economist", "Luxemburg", "2014-05-06", 7, 8, 9, 10, 11, 12, 10.32153516321);
 		
 		System.out.println("3");
 
-		dbWorker.updateTrip("T-4", "doiche tank", "Moscow", "1942-01-06", 1);
-		dbWorker.updateTrip("Guderian", "inspector", "Rein", "1944-05-06", 11, 22, 33, 101);
-		dbWorker.updateTrip("David", "Manager", "Oslo", "2010-11-12", 60, 61, 62, 63, 64, 64, 201);
+		dbWorker.selectAllTrips();
+		
+//		dbWorker.updateTrip("T-4", "doiche tank", "Moscow", "1942-01-06", 1);
+//		dbWorker.updateTrip("Guderian", "inspector", "Rein", "1944-05-06", 11, 22, 33, 101);
+//		dbWorker.updateTrip("David", "Manager", "Oslo", "2010-11-12", 60, 61, 62, 63, 64, 64, 201);
 		
 //		dbWorker.dropTable();
 		

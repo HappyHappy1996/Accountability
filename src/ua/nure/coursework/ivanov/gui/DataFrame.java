@@ -42,14 +42,14 @@ public class DataFrame extends JFrame {
 	private JLabel actualDailyHabitationLabel = new JLabel("Actual daily habitation");
 	private JTextField actualDailyHabitation = new JTextField();
 
-	private JButton changeButton = new JButton("Edit");
+	private JButton changeButton = new JButton("OK");
 	private JButton backButton = new JButton("Back");
 
 	public DataFrame() throws SQLException, ReflectiveOperationException {
-		setTitle("Input");
-		setBounds(100, 100, 1000, 600);
+		
+		setBounds(100, 100, 600, 600);
 		setVisible(true);
-		setDefaultCloseOperation(HIDE_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		setResizable(false);
 
@@ -95,8 +95,8 @@ public class DataFrame extends JFrame {
 		
 		typeLabel.setBounds(10, 20, 180, 25);
 		tripType.setBounds(200, 20, 100, 25);
-		changeButton.setBounds(250, 500, 80, 25);
-		backButton.setBounds(750, 500, 80, 25);
+		changeButton.setBounds(10, 500, 80, 25);
+		backButton.setBounds(400, 500, 80, 25);
 		
 		personNameLabel.setBounds				(10, 60, 150, 25);
 		personName.setBounds					(160, 60, 150, 25);
@@ -122,27 +122,17 @@ public class DataFrame extends JFrame {
 		tripType.addItem(TripState.OPENED);
 		tripType.addItem(TripState.DEPARTED);
 		tripType.addItem(TripState.RETURNED);
-		tripType.addItem(TripState.CLOSED);
 		
 		initializeListeners();
 
 	}
 
 	private void initializeListeners() {
-//		change.addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent event) {
-//				try {
-//					dbWorker.updateCurrency(currency.getSelectedItem().toString(), Double.parseDouble(value.getText()));
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-
+		
 		backButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
-				DataFrame.this.setVisible(false);
 				StartFrame.getInstance().setVisible(true);
+				DataFrame.this.dispose();
 			}
 		});
 		
@@ -150,7 +140,6 @@ public class DataFrame extends JFrame {
 		    public void actionPerformed(ActionEvent e) {
 		        switch (tripType.getSelectedIndex()) {
 		        case 0:
-					System.out.println("1");
 					expectedDurationLabel.setVisible(false);
 					expectedDuration.setVisible(false);
 					expectedTicketPriceLabel.setVisible(false);
@@ -166,7 +155,6 @@ public class DataFrame extends JFrame {
 					break;
 					
 				case 1:
-					System.out.println("2");
 					expectedDurationLabel.setVisible(true);
 					expectedDuration.setVisible(true);
 					expectedTicketPriceLabel.setVisible(true);
@@ -182,25 +170,68 @@ public class DataFrame extends JFrame {
 					break;
 					
 				 case 2:
-						System.out.println("3");
-						expectedDurationLabel.setVisible(true);
-						expectedDuration.setVisible(true);
-						expectedTicketPriceLabel.setVisible(true);
-						expectedTicketPrice.setVisible(true);
-						expectedDailyHabitationLabel.setVisible(true);
-						expectedDailyHabitation.setVisible(true);
-						actualDurationLabel.setVisible(true);
-						actualDuration.setVisible(true);
-						actualTicketPriceLabel.setVisible(true);
-						actualTicketPrice.setVisible(true);
-						actualDailyHabitationLabel.setVisible(true);
-						actualDailyHabitation.setVisible(true);
-					
-				case 3:
-					System.out.println("4");
-					break;
+					expectedDurationLabel.setVisible(true);
+					expectedDuration.setVisible(true);
+					expectedTicketPriceLabel.setVisible(true);
+					expectedTicketPrice.setVisible(true);
+					expectedDailyHabitationLabel.setVisible(true);
+					expectedDailyHabitation.setVisible(true);
+					actualDurationLabel.setVisible(true);
+					actualDuration.setVisible(true);
+					actualTicketPriceLabel.setVisible(true);
+					actualTicketPrice.setVisible(true);
+					actualDailyHabitationLabel.setVisible(true);
+					actualDailyHabitation.setVisible(true);
 		        }
 		    }
 		});
+	}
+
+	public JTextField getPersonName() {
+		return personName;
+	}
+
+	public JTextField getPersonAppointment() {
+		return personAppointment;
+	}
+
+	public JTextField getDestination() {
+		return destination;
+	}
+
+	public JTextField getDate() {
+		return date;
+	}
+	
+	public JTextField getExpectedDuration() {
+		return expectedDuration;
+	}
+
+	public JTextField getExpectedTicketPrice() {
+		return expectedTicketPrice;
+	}
+
+	public JTextField getExpectedDailyHabitation() {
+		return expectedDailyHabitation;
+	}
+
+	public JTextField getActualDuration() {
+		return actualDuration;
+	}
+
+	public JTextField getActualTicketPrice() {
+		return actualTicketPrice;
+	}
+
+	public JTextField getActualDailyHabitation() {
+		return actualDailyHabitation;
+	}
+	
+	public JButton getChangeButton() {
+		return changeButton;
+	}
+
+	public JComboBox getTripTypeComboBox() {
+		return tripType;
 	}
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class StartFrame extends JFrame {
 
@@ -18,7 +19,7 @@ public class StartFrame extends JFrame {
 	
 	private static StartFrame instance;
 
-	public StartFrame() {
+	private StartFrame() {
 		setTitle("Start window");
 		setBounds(100, 100, 250, 220);
 		setVisible(true);
@@ -48,28 +49,33 @@ public class StartFrame extends JFrame {
 	private void initializeListeners() {
 		overviewButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
-				new OverviewFrame();
+				OverviewFrame.getInstance().setVisible(true);
 			}
 		});
 		
 		inputValuesButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
+				StartFrame.this.setVisible(false);
 				try {
-//					StartFrame.getInstance().setVisible(false);
 					dataInputFrame = new DataInputFrame();
 				} catch (SQLException | ReflectiveOperationException e) {
+					JOptionPane.showMessageDialog(null, "Can't connect to DB");
 					e.printStackTrace();
+					StartFrame.this.setVisible(true);
 				}
 			}
 		});
 		
 		editValuesButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
+				StartFrame.this.setVisible(false);
 				try {
 					dataEditFrame = new DataEditFrame();
 					StartFrame.getInstance().setVisible(false);;
 				} catch (SQLException | ReflectiveOperationException e) {
+					JOptionPane.showMessageDialog(null, "Can't connect to DB");
 					e.printStackTrace();
+					StartFrame.this.setVisible(true);
 				}
 			}
 		});
