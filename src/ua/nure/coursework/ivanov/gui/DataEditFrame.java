@@ -56,6 +56,10 @@ public class DataEditFrame extends DataFrame {
 		
 		removeButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
+				if (editableTrip == null) {
+					JOptionPane.showMessageDialog(null, "First choose a row for editing!");
+					return;
+				}
 				try {
 					DBWorker dbWorker = DBWorker.getInstance();
 					dbWorker.deleteTrip(editableTrip.getId());
@@ -98,6 +102,11 @@ public class DataEditFrame extends DataFrame {
 		
 		getChangeButton().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
+				
+				if (editableTrip == null) {
+					JOptionPane.showMessageDialog(null, "First choose a row for editing!");
+					return;
+				}
 					
 				int beforeIndexState = editableTrip.getState().ordinal();
 				int afterIndexState = getTripTypeComboBox().getSelectedIndex();
