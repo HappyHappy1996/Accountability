@@ -93,8 +93,8 @@ public class DataEditFrame extends DataFrame {
 //				}
 				
 				Trip trip = null;
-				SwingWorker sw = new SwingWorkerLoader(trip, DataEditFrame.this);
-				sw.execute();
+				SwingWorker swingWorker = new SwingWorkerLoader(trip, DataEditFrame.this);
+				swingWorker.execute();
 				
 			
 			}
