@@ -2,6 +2,7 @@ package ua.nure.coursework.ivanov.gui;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -150,7 +151,9 @@ public class DataEditFrame extends DataFrame {
 						break;
 					}
 					JOptionPane.showMessageDialog(null, "Update is done");
-				} catch (SQLException | ReflectiveOperationException e) {
+				} catch (SQLDataException e) {
+					JOptionPane.showMessageDialog(null, "Wrong input data!");
+				}catch (SQLException | ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
 			}
