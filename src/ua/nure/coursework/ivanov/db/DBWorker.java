@@ -204,9 +204,13 @@ public class DBWorker {
 //		dbWorker.createTable();
 		
 //		System.out.println("2");
-//		dbWorker.insertTrip("Abrams", "Tank", "NY", "1971-02-03");
-//		dbWorker.insertTrip("Rommel", "General", "Berlin", "2001-02-03", 1, 2, 3);
-//		dbWorker.insertTrip("Mark", "Economist", "Luxemburg", "2014-05-06", 7, 8, 9, 10, 11, 12, 10.32153516321);
+//		dbWorker.insertTrip("Bonnie", "Singer", "NY", "1971-02-03");
+//		dbWorker.insertTrip("Adele", "Singer", "LA", "1975-04-09");
+//		dbWorker.insertTrip("Abrams", "General", "Kosovo", "1965-01-21");
+//		dbWorker.insertTrip("Rommel", "General", "Berlin", "1944-07-17", 1, 2, 3);
+//		dbWorker.insertTrip("Guderian", "Inspector", "Oslo", "1943-02-14", 4, 5, 6);
+//		dbWorker.insertTrip("Mark", "Economist", "Luxemburg", "2014-05-06", 7, 8, 9, 10, 11, 12, 10.2);
+//		dbWorker.insertTrip("Yosef", "Developer", "Poznan", "2015-01-27", 4, 5, 6, 7, 8, 9, 19.2);
 		
 		System.out.println("3");
 

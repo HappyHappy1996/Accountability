@@ -54,8 +54,10 @@ public class DataInputFrame extends DataFrame {
 						break;
 					}
 					JOptionPane.showMessageDialog(null, "Insert is done");
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null, "Wrong expected/actual data!");
 				} catch (SQLDataException e) {
-					JOptionPane.showMessageDialog(null, "Wrong input data!");
+					JOptionPane.showMessageDialog(null, "Wrong date!");
 				} catch (SQLException | ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
