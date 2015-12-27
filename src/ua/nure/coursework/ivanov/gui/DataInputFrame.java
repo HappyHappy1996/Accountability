@@ -16,8 +16,8 @@ public class DataInputFrame extends DataFrame {
 
 	public DataInputFrame() throws SQLException, ReflectiveOperationException {
 		super();
-		setTitle("Input window");
-		getChangeButton().setText("Input");
+		setTitle("Окно ввода");
+		getChangeButton().setText("Внести");
 		
 		getChangeButton().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -53,11 +53,11 @@ public class DataInputFrame extends DataFrame {
 								Double.parseDouble(getActualDailyHabitation().getText()), balance);
 						break;
 					}
-					JOptionPane.showMessageDialog(null, "Insert is done");
+					JOptionPane.showMessageDialog(null, "Добавлено");
 				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null, "Wrong expected/actual data!");
+					JOptionPane.showMessageDialog(null, "Некорректные ожидаемые/актуальные данные!");
 				} catch (SQLDataException e) {
-					JOptionPane.showMessageDialog(null, "Wrong date!");
+					JOptionPane.showMessageDialog(null, "Некорректная дата!");
 				} catch (SQLException | ReflectiveOperationException e) {
 					e.printStackTrace();
 				}

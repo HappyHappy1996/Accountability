@@ -16,9 +16,9 @@ import ua.nure.coursework.ivanov.db.DBWorker;
 
 public class DataEditFrame extends DataFrame {
 
-	private JButton chooseButton = new JButton("Choose");
-	private JButton removeButton = new JButton("Remove");
-	private JButton closeButton = new JButton("Close");
+	private JButton chooseButton = new JButton("Выбрать");
+	private JButton removeButton = new JButton("Удалить");
+	private JButton closeButton = new JButton("Закрыть");
 	
 	private Trip editableTrip;
 	
@@ -28,16 +28,16 @@ public class DataEditFrame extends DataFrame {
 	
 	public DataEditFrame() throws SQLException, ReflectiveOperationException {
 		super();
-		setTitle("Edit window");
-		getChangeButton().setText("Edit");
+		setTitle("Окно редактирования");
+		getChangeButton().setText("Редактировать");
 		add(chooseButton);
-		chooseButton.setBounds(400, 60, 80, 25);
+		chooseButton.setBounds(400, 60, 140, 25);
 		
 //		add(closeButton);
-		closeButton.setBounds(110, 500, 80, 25);
+		closeButton.setBounds(110, 500, 140, 25);
 		
 		add(removeButton);
-		removeButton.setBounds(210, 500, 80, 25);
+		removeButton.setBounds(210, 500, 140, 25);
 		
 		closeButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -50,7 +50,7 @@ public class DataEditFrame extends DataFrame {
 						e.printStackTrace();
 					}
 				} else {
-					JOptionPane.showMessageDialog(null, "Illegal operation!");
+					JOptionPane.showMessageDialog(null, "Запрещенная операция!");
 				}
 			}
 		});
@@ -58,13 +58,13 @@ public class DataEditFrame extends DataFrame {
 		removeButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				if (editableTrip == null) {
-					JOptionPane.showMessageDialog(null, "First choose a row for editing!");
+					JOptionPane.showMessageDialog(null, "Сначала выбрерите строку для редактирования!");
 					return;
 				}
 				try {
 					DBWorker dbWorker = DBWorker.getInstance();
 					dbWorker.deleteTrip(editableTrip.getId());
-					JOptionPane.showMessageDialog(null, "Removed");
+					JOptionPane.showMessageDialog(null, "Удалено");
 					clearFields();
 				} catch (SQLException | ReflectiveOperationException e) {
 					e.printStackTrace();
@@ -105,7 +105,7 @@ public class DataEditFrame extends DataFrame {
 			public void mouseClicked(MouseEvent event) {
 				
 				if (editableTrip == null) {
-					JOptionPane.showMessageDialog(null, "First choose a row for editing!");
+					JOptionPane.showMessageDialog(null, "Сначала выбрерите строку для редактирования!");
 					return;
 				}
 					
@@ -113,7 +113,7 @@ public class DataEditFrame extends DataFrame {
 				int afterIndexState = getTripTypeComboBox().getSelectedIndex();
 					
 				if (afterIndexState < beforeIndexState) {
-					JOptionPane.showMessageDialog(null, "Illegal operation!");
+					JOptionPane.showMessageDialog(null, "Запрещенная операция!");
 					return;
 				}
 					
@@ -150,9 +150,9 @@ public class DataEditFrame extends DataFrame {
 								Double.parseDouble(getActualDailyHabitation().getText()), balance, tripId);
 						break;
 					}
-					JOptionPane.showMessageDialog(null, "Update is done");
+					JOptionPane.showMessageDialog(null, "Обновление выполнено");
 				} catch (SQLDataException e) {
-					JOptionPane.showMessageDialog(null, "Wrong input data!");
+					JOptionPane.showMessageDialog(null, "Некорректные данные!");
 				}catch (SQLException | ReflectiveOperationException e) {
 					e.printStackTrace();
 				}
@@ -185,9 +185,6 @@ class SwingWorkerLoader extends SwingWorker {
     public SwingWorkerLoader(Trip trip, DataEditFrame frame) {
         this.trip = trip;
         this.frame = frame;
-        // this operation is safe because
-        // 1. SwingWorkerLoader is created in EDT
-        // 2. Anyway - UICallback is proxied by EDTInvocationHandler  
     }
 
     /**
@@ -204,6 +201,7 @@ class SwingWorkerLoader extends SwingWorker {
 		while (!overviewFrame.isChoosen()) {
 			trip = overviewFrame.getSelectedTrip();
 		}
+
         return null;
     }
 

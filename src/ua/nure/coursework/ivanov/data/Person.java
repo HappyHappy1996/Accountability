@@ -13,9 +13,9 @@ public class Person {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Person [name=");
+		builder.append("Сотрудник [имя=");
 		builder.append(name);
-		builder.append(", appointment=");
+		builder.append(", должность=");
 		builder.append(appointment);
 		builder.append("]");
 		return builder.toString();

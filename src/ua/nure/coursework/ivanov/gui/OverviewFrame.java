@@ -39,7 +39,7 @@ public class OverviewFrame extends JFrame {
 
 	private OverviewFrame() {
 
-		setTitle("Overview");
+		setTitle("Îבחמנ");
 		setSize(1000, 600);
 	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    setVisible(true);

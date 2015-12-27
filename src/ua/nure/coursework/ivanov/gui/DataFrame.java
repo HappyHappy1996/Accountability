@@ -16,34 +16,34 @@ import ua.nure.coursework.ivanov.data.Trip.TripState;
 
 public class DataFrame extends JFrame {
 
-	private JLabel typeLabel = new JLabel("Select state of business trip");
+	private JLabel typeLabel = new JLabel("Состояние командировки");
 	private JComboBox<TripState> tripType = new JComboBox<TripState>();
 	
-	private JLabel personNameLabel = new JLabel("Person name");
+	private JLabel personNameLabel = new JLabel("Имя сотрудника");
 	private JTextField personName = new JTextField();
-	private JLabel personAppointmentLabel = new JLabel("Person appointment");
+	private JLabel personAppointmentLabel = new JLabel("Должность сотрудника");
 	private JTextField personAppointment = new JTextField();
-	private JLabel destinationLabel = new JLabel("Destination");
+	private JLabel destinationLabel = new JLabel("Направление");
 	private JTextField destination = new JTextField();
-	private JLabel dateLabel = new JLabel("Date (e.g. 1970-01-01)");
+	private JLabel dateLabel = new JLabel("Дата (e.g. 1970-01-01)");
 	private JTextField date = new JTextField();
 	
-	private JLabel expectedDurationLabel = new JLabel("Expected duration");
+	private JLabel expectedDurationLabel = new JLabel("Ожидаемая длительность");
 	private JTextField expectedDuration = new JTextField();
-	private JLabel expectedTicketPriceLabel = new JLabel("Expected ticket price");
+	private JLabel expectedTicketPriceLabel = new JLabel("Ожидаемая цена билета");
 	private JTextField expectedTicketPrice = new JTextField();
-	private JLabel expectedDailyHabitationLabel = new JLabel("Expected daily habitation");
+	private JLabel expectedDailyHabitationLabel = new JLabel("Ожидаемые суточные");
 	private JTextField expectedDailyHabitation = new JTextField();
 	
-	private JLabel actualDurationLabel = new JLabel("Actual duration");
+	private JLabel actualDurationLabel = new JLabel("Фактическая длительность");
 	private JTextField actualDuration = new JTextField();
-	private JLabel actualTicketPriceLabel = new JLabel("Actual ticket price");
+	private JLabel actualTicketPriceLabel = new JLabel("Фактическая цена билета");
 	private JTextField actualTicketPrice = new JTextField();
-	private JLabel actualDailyHabitationLabel = new JLabel("Actual daily habitation");
+	private JLabel actualDailyHabitationLabel = new JLabel("Фактические суточные");
 	private JTextField actualDailyHabitation = new JTextField();
 
 	private JButton changeButton = new JButton("OK");
-	private JButton backButton = new JButton("Back");
+	private JButton backButton = new JButton("Назад");
 
 	public DataFrame() throws SQLException, ReflectiveOperationException {
 		
@@ -95,29 +95,29 @@ public class DataFrame extends JFrame {
 		
 		typeLabel.setBounds(10, 20, 180, 25);
 		tripType.setBounds(200, 20, 100, 25);
-		changeButton.setBounds(10, 500, 80, 25);
-		backButton.setBounds(400, 500, 80, 25);
+		changeButton.setBounds(10, 500, 140, 25);
+		backButton.setBounds(400, 500, 140, 25);
 		
-		personNameLabel.setBounds				(10, 60, 150, 25);
-		personName.setBounds					(160, 60, 150, 25);
-		personAppointmentLabel.setBounds		(10, 100, 150, 25);
-		personAppointment.setBounds				(160, 100, 150, 25);
-		destinationLabel.setBounds				(10, 140, 150, 25);
-		destination.setBounds					(160, 140, 150, 25);
-		dateLabel.setBounds						(10, 180, 150, 25);
-		date.setBounds							(160, 180, 150, 25);
-		expectedDurationLabel.setBounds			(10, 220, 150, 25);
-		expectedDuration.setBounds				(160, 220, 150, 25);
-		expectedTicketPriceLabel.setBounds		(10, 260, 150, 25);
-		expectedTicketPrice.setBounds			(160, 260, 150, 25);
-		expectedDailyHabitationLabel.setBounds	(10, 300, 150, 25);
-		expectedDailyHabitation.setBounds		(160, 300, 150, 25);
-		actualDurationLabel.setBounds			(10, 340, 150, 25);
-		actualDuration.setBounds				(160, 340, 150, 25);
-		actualTicketPriceLabel.setBounds		(10, 380, 150, 25);
-		actualTicketPrice.setBounds				(160, 380, 150, 25);
-		actualDailyHabitationLabel.setBounds	(10, 420, 150, 25);
-		actualDailyHabitation.setBounds			(160, 420, 150, 25);
+		personNameLabel.setBounds				(10, 60, 170, 25);
+		personName.setBounds					(200, 60, 150, 25);
+		personAppointmentLabel.setBounds		(10, 100, 170, 25);
+		personAppointment.setBounds				(200, 100, 150, 25);
+		destinationLabel.setBounds				(10, 140, 170, 25);
+		destination.setBounds					(200, 140, 150, 25);
+		dateLabel.setBounds						(10, 180, 170, 25);
+		date.setBounds							(200, 180, 150, 25);
+		expectedDurationLabel.setBounds			(10, 220, 170, 25);
+		expectedDuration.setBounds				(200, 220, 150, 25);
+		expectedTicketPriceLabel.setBounds		(10, 260, 170, 25);
+		expectedTicketPrice.setBounds			(200, 260, 150, 25);
+		expectedDailyHabitationLabel.setBounds	(10, 300, 170, 25);
+		expectedDailyHabitation.setBounds		(200, 300, 150, 25);
+		actualDurationLabel.setBounds			(10, 340, 170, 25);
+		actualDuration.setBounds				(200, 340, 150, 25);
+		actualTicketPriceLabel.setBounds		(10, 380, 170, 25);
+		actualTicketPrice.setBounds				(200, 380, 150, 25);
+		actualDailyHabitationLabel.setBounds	(10, 420, 170, 25);
+		actualDailyHabitation.setBounds			(200, 420, 150, 25);
 
 		tripType.addItem(TripState.OPENED);
 		tripType.addItem(TripState.DEPARTED);

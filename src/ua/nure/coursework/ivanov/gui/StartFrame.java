@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 
 public class StartFrame extends JFrame {
 
-	private JButton overviewButton = new JButton("Overview");
-	private JButton inputValuesButton = new JButton("Input values");
-	private JButton editValuesButton = new JButton("Edit values");
+	private JButton overviewButton = new JButton("Обзор");
+	private JButton inputValuesButton = new JButton("Ввести данные");
+	private JButton editValuesButton = new JButton("Редактировать данные");
 	
 	private DataEditFrame dataEditFrame = null;
 	private DataInputFrame dataInputFrame = null;
@@ -20,7 +20,7 @@ public class StartFrame extends JFrame {
 	private static StartFrame instance;
 
 	private StartFrame() {
-		setTitle("Start window");
+		setTitle("Стартовое окно");
 		setBounds(100, 100, 250, 220);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,9 +31,9 @@ public class StartFrame extends JFrame {
 		add(inputValuesButton);
 		add(editValuesButton);
 
-		overviewButton.setBounds(65, 30, 120, 25);
-		inputValuesButton.setBounds(65, 80, 120, 25);
-		editValuesButton.setBounds(65, 130, 120, 25);
+		overviewButton.setBounds(30, 30, 180, 25);
+		inputValuesButton.setBounds(30, 80, 180, 25);
+		editValuesButton.setBounds(30, 130, 180, 25);
 
 		initializeListeners();
 

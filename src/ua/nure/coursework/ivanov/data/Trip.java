@@ -91,7 +91,7 @@ public class Trip {
 			expectedCost = new Cost(expectedDuration, expectedTicketPrice, expectedDailyHabitation);
 			state = TripState.DEPARTED;
 		} else {
-			throw new IllegalStateException("The trip has wrong state!");
+			throw new IllegalStateException("Командировка имеет некорректное состояние!");
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class Trip {
 			balance = expectedCost.getValue() - actualCost.getValue();
 			state = TripState.RETURNED;
 		} else {
-			throw new IllegalStateException("The trip has wrong state!");
+			throw new IllegalStateException("Командировка имеет некорректное состояние!");
 		}
 		
 	}
@@ -113,7 +113,7 @@ public class Trip {
 			expectedCost = null;
 			actualCost = null;
 		} else {
-			throw new IllegalStateException("The trip has wrong state!");
+			throw new IllegalStateException("Командировка имеет некорректное состояние!");
 		}
 	}
 	
@@ -121,29 +121,29 @@ public class Trip {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(person);
-		builder.append(", destination=");
+		builder.append(", направление=");
 		builder.append(destination);
-		builder.append(", date=");
+		builder.append(", дата=");
 		builder.append(date);
 		
 		switch (state) {
 			
 		case DEPARTED:
-			builder.append(", expected");
+			builder.append(", ожидаемая");
 			builder.append(expectedCost);
 			break;
 			
 		case RETURNED:
-			builder.append(", expected");
+			builder.append(", ожидаемая");
 			builder.append(expectedCost);
-			builder.append(", actual");
+			builder.append(", фактическая");
 			builder.append(actualCost);
-			builder.append(", balance=");
+			builder.append(", баланс=");
 			builder.append(balance);
 			break;
 
 		case CLOSED:
-			builder.append(", balance=");
+			builder.append(", баланс=");
 			builder.append(balance);
 			break;
 		}
@@ -175,11 +175,11 @@ public class Trip {
 		@Override
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
-			builder.append("Cost [duration=");
+			builder.append(" стоимость [длительность=");
 			builder.append(duration);
-			builder.append(", ticketPrice=");
+			builder.append(", цена билета=");
 			builder.append(ticketPrice);
-			builder.append(", dailyHabitation=");
+			builder.append(", суточные=");
 			builder.append(dailyHabitation);
 			builder.append("]");
 			return builder.toString();
@@ -188,7 +188,19 @@ public class Trip {
 	}
 
 	public enum TripState {
-		OPENED, DEPARTED, RETURNED, CLOSED;
+		OPENED("Открыта"), DEPARTED("Начата"), RETURNED("Возвращена"), CLOSED("Закрыта");
+		
+		private final String fieldDescription;
+
+	    private TripState(String value) {
+	        fieldDescription = value;
+	    }
+
+		public String toString() {
+			// TODO Auto-generated method stub
+			return fieldDescription;
+		}
+
 	}
 
 	public Person getPerson() {
