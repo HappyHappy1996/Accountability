@@ -62,46 +62,63 @@ public class DBWorker {
         statement.close();
     }
         
-    public Trip[] selectAllTrips() throws SQLException {
+	public Trip[] selectAllTrips() throws SQLException {
 		try {
+			int tripsCount = selectTripsCount();
+			if (tripsCount == 0) {
+				return new Trip[0];
+			}
+			
+			Trip[] tripsArray = createAndFillTripsArray(tripsCount);
+			return tripsArray;
+		} catch (SQLException e) {
+			throw e;
+		}
+	}
+    
+    private int selectTripsCount() throws SQLException {
+    	int size = 0;
+    	try {
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select count(*) from " + TABLE_NAME);
-			int size = 0;
 			if (resultSet.next()) {
 				size = resultSet.getInt(1);
 				statement.close();
 			} else {
 				resultSet.close();
 				statement.close();
-				return null;
+				System.out.println("size in else in selectTripsCount method section is " + size);
+				return size;
 			}
-			
-			Trip[] array = new Trip[size];
-			
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery("select * from " + TABLE_NAME);
-			int iteration = 0;
-			while (resultSet.next()) {
-				array[iteration] = new Trip(new Person(resultSet.getString("name"), resultSet.getString("appointment")), 
-						resultSet.getString("destination"), resultSet.getDate("date").toString(), resultSet.getInt("id"));
-				if (resultSet.getInt("expectedDuration") != 0) {
-					array[iteration].setExpectedCost(resultSet.getInt("expectedDuration"),
-							resultSet.getDouble("expectedTicketPrice"), resultSet.getDouble("expectedDailyHabitation"));
-					if (resultSet.getInt("actualDuration") != 0) {
-						array[iteration].setActualCost(resultSet.getInt("actualDuration"),
-								resultSet.getDouble("actualTicketPrice"), resultSet.getDouble("actualDailyHabitation"));
-					}
-				}
-				iteration++;
-			}
-			
-			resultSet.close();
-			statement.close();
-			return array;
 		} catch (SQLException e) {
 			throw e;
 		}
-	}
+    	return size;
+    }
+    
+    private Trip[] createAndFillTripsArray(int arraySize) throws SQLException {
+    	Trip[] tripsArray = new Trip[arraySize];
+    	statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("select * from " + TABLE_NAME);
+		int iteration = 0;
+		while (resultSet.next()) {
+			tripsArray[iteration] = new Trip(new Person(resultSet.getString("name"), resultSet.getString("appointment")), 
+					resultSet.getString("destination"), resultSet.getDate("date").toString(), resultSet.getInt("id"));
+			if (resultSet.getInt("expectedDuration") != 0) {
+				tripsArray[iteration].setExpectedCost(resultSet.getInt("expectedDuration"),
+						resultSet.getDouble("expectedTicketPrice"), resultSet.getDouble("expectedDailyHabitation"));
+				if (resultSet.getInt("actualDuration") != 0) {
+					tripsArray[iteration].setActualCost(resultSet.getInt("actualDuration"),
+							resultSet.getDouble("actualTicketPrice"), resultSet.getDouble("actualDailyHabitation"));
+				}
+			}
+			iteration++;
+		}
+		
+		resultSet.close();
+		statement.close();
+    	return tripsArray;
+    }
 
 	public void updateTrip(String name, String appointment, String destination, String date, int id) throws SQLException {
     	statement = connection.createStatement();
