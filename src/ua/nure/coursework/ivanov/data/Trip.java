@@ -197,7 +197,6 @@ public class Trip {
 	    }
 
 		public String toString() {
-			// TODO Auto-generated method stub
 			return fieldDescription;
 		}
 
